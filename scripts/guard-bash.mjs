@@ -25,12 +25,12 @@ if (readsSecretFile.test(cmd)) {
   block("Blocked: reading .env, wallets.toml or mnemonic files would expose secrets in the conversation. Ask the user which variable names are expected instead.");
 }
 
-// 3. Mainnet broadcasts require an explicit opt-in set by the user.
+// 3. Mainnet broadcasts are left to the user's own terminal.
 const mainnet =
   /--net(?:work)?(?:=|\s+)mainnet\b/.test(cmd) ||
   /\b(?:TON_)?NETWORK\s*=\s*mainnet\b/.test(cmd);
-if (mainnet && process.env.TON_ALLOW_MAINNET !== "1") {
-  block("Blocked: mainnet operations are disabled by default. Finish testnet and the security review first. If the user really wants mainnet, THEY must start Claude Code with TON_ALLOW_MAINNET=1 — do not set it yourself.");
+if (mainnet) {
+  block("Blocked: mainnet transactions are never sent from Claude. Finish testnet and the security review, then the user runs the mainnet command in their own terminal.");
 }
 
 process.exit(0);

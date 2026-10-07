@@ -67,8 +67,8 @@ job at verifier.ton.org.
 
 ## Safety
 
-- Default to **testnet**. This plugin's hook blocks `--net mainnet` until the user sets
-  `TON_ALLOW_MAINNET=1` themselves; never set it for them.
+- Default to **testnet**. This plugin's hook blocks `--net mainnet`; mainnet commands are run by
+  the user in their own terminal, after the security review. Give them the exact command.
 - Never ask for, print, log or commit a seed phrase or private key. Reading the chain needs only
   an address. Anything that moves funds is signed by the user in their own wallet.
 - Before mainnet run the `ton-security-reviewer` agent and recommend a human audit for anything

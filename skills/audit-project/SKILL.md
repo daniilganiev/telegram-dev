@@ -20,6 +20,6 @@ and ask before changing code.
 4. **Payments (if present).** Delegate to the `telegram-security-reviewer` agent.
 5. **Contracts (if `Acton.toml` exists).** `acton build`, `acton check`, `acton test --coverage`
    (WSL on Windows). Then delegate to the `ton-security-reviewer` agent.
-6. **Summary.** One table: area, status (pass / fail / skipped), top finding. Then go through the
+6. **Summary.** One table: area, status (passed, failed or skipped), top finding. Then go through the
    `telegram-launch` checklist for what automation can't check. End with a verdict: ready for
    release, ready for a human audit, or not ready. Never call anything "safe for mainnet".

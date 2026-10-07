@@ -46,7 +46,7 @@ Local Node scripts that send nothing anywhere:
 - refuse to write a bot token, seed phrase or private key into source files (`.env` is exempt);
 - block passing `MNEMONIC`/`PRIVATE_KEY`/`BOT_TOKEN` inline in a command, reading `.env` and
   `wallets.toml`, and `acton wallet export-mnemonic`;
-- block `--net mainnet` until the user starts Claude Code with `TON_ALLOW_MAINNET=1` themselves;
+- block `--net mainnet` and other mainnet transactions: the user runs those in their own terminal;
 - run `acton build` after a `.tolk` edit and show compile errors (if Acton is installed; on
   Windows the hook calls Acton inside WSL).
 

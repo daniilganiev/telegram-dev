@@ -10,7 +10,7 @@ const run = (script, payload, env = {}) =>
   spawnSync("node", [join(scripts, script)], {
     input: JSON.stringify(payload),
     encoding: "utf8",
-    env: { ...process.env, TON_ALLOW_MAINNET: "", ...env },
+    env: { ...process.env, ...env },
   });
 
 const bash = (command, env) => run("guard-bash.mjs", { tool_input: { command } }, env);
@@ -28,8 +28,8 @@ test("guard-bash blocks mainnet without opt-in", () => {
   }
 });
 
-test("guard-bash allows mainnet when the user opted in", () => {
-  assert.equal(bash("acton script s.tolk --net mainnet", { TON_ALLOW_MAINNET: "1" }).status, 0);
+test("guard-bash blocks mainnet even with the old opt-in variable", () => {
+  assert.equal(bash("acton script s.tolk --net mainnet", { TON_ALLOW_MAINNET: "1" }).status, 2);
 });
 
 test("guard-bash blocks inline secrets and secret-printing commands", () => {

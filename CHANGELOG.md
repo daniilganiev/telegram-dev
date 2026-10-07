@@ -18,6 +18,8 @@
 - `initData` reference fixed: `signature` stays in the HMAC data-check-string; byte-order sort.
 - Evals for the 2026 Bot API traps: `ai-stream-draft`, `ephemeral-group`, `quiz-poll`.
 - Privacy policy (PRIVACY.md).
+- Mainnet commands are now always blocked in Claude (no `TON_ALLOW_MAINNET` opt-in); the user
+  runs them in their own terminal.
 - Acton flows checked on Acton 1.2.1 in WSL: deploy script path is `contracts/scripts/deploy.tolk`
   (was `scripts/deploy.tolk`); `after-tolk-edit` now runs `acton build` through WSL on Windows.
 

@@ -66,6 +66,6 @@ in `telegram-payments` and `telegram-ton`.
 
 - Secrets (bot token, API keys, seed phrases, private keys) never go into the repo, the front
   end, logs or the chat. This plugin's hooks block the common mistakes.
-- TON work defaults to testnet; mainnet is blocked until the user opts in with
-  `TON_ALLOW_MAINNET=1` themselves.
+- TON work defaults to testnet. Mainnet commands are blocked by the plugin's hook; the user runs
+  them in their own terminal.
 - Anything that moves money is signed by the user in their own wallet, never by Claude.
