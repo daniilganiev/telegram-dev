@@ -18,8 +18,9 @@
 - `initData` reference fixed: `signature` stays in the HMAC data-check-string; byte-order sort.
 - Evals and hook tests moved out of the published plugin (kept by the author).
 - Privacy policy (PRIVACY.md).
-- Mainnet commands are now always blocked in Claude (no `TON_ALLOW_MAINNET` opt-in); the user
-  runs them in their own terminal.
+- Claude never sends transactions: the hook blocks `acton script --net` (testnet and mainnet),
+  mainnet commands and faucet requests; `deploy-testnet` hands the broadcast command to the user.
+- README examples, SECURITY.md.
 - Acton flows checked on Acton 1.2.1 in WSL: deploy script path is `contracts/scripts/deploy.tolk`
   (was `scripts/deploy.tolk`); `after-tolk-edit` now runs `acton build` through WSL on Windows.
 

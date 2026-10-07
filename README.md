@@ -33,7 +33,7 @@ Mini Apps с проверкой `initData` на сервере, платежи �
 | `/telegram-dev:add-payments [what you sell]` | Payments in an existing project, Stars by default |
 | `/telegram-dev:add-ton-connect` | Wallet connection and login with `ton_proof` |
 | `/telegram-dev:audit-project` | Pre-release audit: secrets, build, tests, reviewers |
-| `/telegram-dev:deploy-testnet [script]` | Step-by-step contract deployment to testnet |
+| `/telegram-dev:deploy-testnet [script]` | Testnet deployment: build, tests, emulation, the command for you to run, on-chain check |
 
 ### Agents
 
@@ -46,12 +46,31 @@ Local Node scripts that send nothing anywhere:
 - refuse to write a bot token, seed phrase or private key into source files (`.env` is exempt);
 - block passing `MNEMONIC`/`PRIVATE_KEY`/`BOT_TOKEN` inline in a command, reading `.env` and
   `wallets.toml`, and `acton wallet export-mnemonic`;
-- block `--net mainnet` and other mainnet transactions: the user runs those in their own terminal;
+- block any transaction broadcast (`acton script --net`, mainnet commands) and faucet requests:
+  the user runs those in their own terminal;
 - run `acton build` after a `.tolk` edit and show compile errors (if Acton is installed; on
   Windows the hook calls Acton inside WSL).
 
 The plugin ships no MCP servers, holds no wallets and never signs transactions. Anything that
 moves money is signed by the user in their own wallet.
+
+## Examples
+
+Ask Claude in plain language; the plugin's skills load on their own.
+
+1. "Build a Telegram bot in Python that sells a 50 Stars sticker pack, with refunds." Claude
+   uses `telegram-bot` and `telegram-payments`: aiogram handlers, a fast pre-checkout check,
+   delivery only on `successful_payment`, idempotent on the charge id, `/terms` and `/paysupport`.
+2. "I want to sell extra lives in my Mini App game for TON." Claude explains that digital goods
+   inside Telegram must be paid in Stars, proposes a Stars checkout, and keeps TON for things
+   like NFT rewards or payouts.
+3. "Validate initData on my FastAPI backend." Claude writes the HMAC check with the `WebAppData`
+   key, constant-time comparison and an `auth_date` limit, and explains why `initDataUnsafe` is
+   not trusted.
+4. "Stream my LLM answers into the Telegram chat as they are generated." Claude uses
+   `sendMessageDraft` with a stable `draft_id` and finishes with `sendMessage` so the reply stays.
+5. `/telegram-dev:new-bot shop-bot ts`, then `/telegram-dev:add-payments` — a webhook-ready
+   grammY bot with Stars payments and tests.
 
 ## What the plugin runs, sends and fetches
 
@@ -66,8 +85,11 @@ moves money is signed by the user in their own wallet.
 - **Requests Claude makes itself:** while working, Claude may open the public docs above, and
   `deploy-testnet` (and debugging with `telegram-ton`) asks the public TON Center testnet API about
   a contract or wallet address to confirm a transaction. Only public addresses are sent; no keys,
-  tokens or personal data. `deploy-testnet` broadcasts a testnet transaction through Acton only
-  after you confirm it; mainnet is never sent from Claude.
+  tokens or personal data.
+- **No transactions from Claude.** The plugin never sends a transaction or requests faucet funds:
+  `deploy-testnet` prepares and emulates the deployment, gives you the exact command to run in
+  your own terminal, then checks the result on chain. A hook blocks `acton script --net` and
+  `acton wallet airdrop` if Claude tries anyway.
 - No telemetry, no MCP servers, no bundled wallets. Details: PRIVACY.md.
 
 ## Requirements

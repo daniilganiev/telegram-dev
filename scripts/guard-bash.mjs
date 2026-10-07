@@ -25,7 +25,10 @@ if (readsSecretFile.test(cmd)) {
   block("Blocked: reading .env, wallets.toml or mnemonic files would expose secrets in the conversation. Ask the user which variable names are expected instead.");
 }
 
-// 3. Mainnet broadcasts are left to the user's own terminal.
+// 3. Transactions are never sent from Claude: the user runs broadcasts in their own terminal.
+if (/\bacton\s+(?:script\b[^|;&]*--net(?:=|\s+)\S+|wallet\s+airdrop\b)/.test(cmd)) {
+  block("Blocked: this would send a transaction or request funds. Give the user the exact command to run in their own terminal, then verify the result on chain.");
+}
 const mainnet =
   /--net(?:work)?(?:=|\s+)mainnet\b/.test(cmd) ||
   /\b(?:TON_)?NETWORK\s*=\s*mainnet\b/.test(cmd);
