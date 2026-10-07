@@ -1,75 +1,73 @@
 # Telegram Dev: Claude plugin
 
-**EN:** A Claude plugin for building in Telegram the right way: bots in TypeScript or Python,
-Mini Apps with server-side `initData` validation, Telegram Stars payments and the rules around
-them, and TON where it meets Telegram (TON Connect, wallet login, TON and jetton payments,
-NFTs, Tolk contracts). It focuses on the mistakes that cost money or get a bot hidden, and on
-API changes newer than most answers you'll find. Community project, **not affiliated with or
-endorsed by Telegram or the TON Foundation**.
+A Claude plugin for building in Telegram the right way: bots in TypeScript or Python, Mini Apps
+with server-side `initData` validation, Telegram Stars payments and the rules around them, and
+TON where it meets Telegram (TON Connect, wallet login, TON and jetton payments, NFTs, Tolk
+contracts). It focuses on the mistakes that cost money or get a bot hidden, and on API changes
+newer than most answers you'll find. Community project, **not affiliated with or endorsed by
+Telegram or the TON Foundation**.
 
 **RU:** Плагин для Claude, чтобы делать в Telegram правильно: боты на TypeScript или Python,
 Mini Apps с проверкой `initData` на сервере, платежи в Stars и правила вокруг них, и TON там,
-где он касается Telegram (TON Connect, вход через кошелёк, приём TON и jetton, NFT, контракты
-на Tolk). Упор на ошибки, которые стоят денег или приводят к скрытию бота, и на свежие изменения
-API. Проект сообщества, **не связан с Telegram и TON Foundation и не одобрен ими**.
+где он касается Telegram. Проект сообщества, не связан с Telegram и TON Foundation.
 
-## Что внутри
+## What's inside
 
-### Скиллы (Claude подключает сам по смыслу запроса)
+### Skills (Claude loads them automatically when relevant)
 
-| Скилл | Что делает |
+| Skill | What it does |
 |---|---|
-| `telegram-dev` | С чего начать: бот, Mini App или канал, как брать деньги, нужен ли блокчейн |
-| `telegram-bot` | Боты на grammY и aiogram: вебхуки, лимиты, рассылки, автоматизация каналов, ИИ-боты со стримингом, Business и managed bots, изменения Bot API 2026 |
-| `telegram-mini-app` | Mini App: SDK, темы, safe area, хранилища, проверка `initData` на TS и Python |
-| `telegram-payments` | Stars: инвойсы, pre-checkout, возвраты, подписки, платные медиа, подарки, требования к запуску |
-| `telegram-ton` | TON Connect, `ton_proof`, приём TON и jetton, NFT, чтение сети через TON Center, контракты на Tolk |
-| `telegram-launch` | Чек-лист перед запуском, мониторинг, монетизация |
+| `telegram-dev` | Where to start: bot, Mini App or channel, how to charge, whether you need a blockchain at all |
+| `telegram-bot` | grammY and aiogram bots: webhooks, limits, broadcasts, channel automation, AI bots with streaming, Business and managed bots, Bot API changes of 2026 |
+| `telegram-mini-app` | Mini Apps: SDK, theming, safe areas, storage, `initData` validation in TS and Python |
+| `telegram-payments` | Stars: invoices, pre-checkout, refunds, subscriptions, paid media, gifts, go-live requirements |
+| `telegram-ton` | TON Connect, `ton_proof`, accepting TON and jettons, NFTs, reading the chain via TON Center, Tolk contracts |
+| `telegram-launch` | Release checklist, monitoring, monetization |
 
-### Команды (запускает пользователь)
+### Commands
 
-| Команда | Что делает |
+| Command | What it does |
 |---|---|
-| `/telegram-dev:new-bot <имя> [ts\|py]` | Новый бот на grammY или aiogram, готовый к вебхуку |
-| `/telegram-dev:new-mini-app <имя> [ton]` | Новый Mini App с бэкендом; с `ton` — контракт и TON Connect через Acton |
-| `/telegram-dev:add-payments [что продаём]` | Платежи в существующий проект, Stars по умолчанию |
-| `/telegram-dev:add-ton-connect` | Подключение кошелька и вход через `ton_proof` |
-| `/telegram-dev:audit-project` | Предрелизный аудит: секреты, сборка, тесты, ревьюеры |
-| `/telegram-dev:deploy-testnet [скрипт]` | Пошаговый деплой контракта в testnet |
+| `/telegram-dev:new-bot <name> [ts\|py]` | New grammY or aiogram bot, webhook-ready |
+| `/telegram-dev:new-mini-app <name> [ton]` | New Mini App with a backend; with `ton`, a contract and TON Connect via Acton |
+| `/telegram-dev:add-payments [what you sell]` | Payments in an existing project, Stars by default |
+| `/telegram-dev:add-ton-connect` | Wallet connection and login with `ton_proof` |
+| `/telegram-dev:audit-project` | Pre-release audit: secrets, build, tests, reviewers |
+| `/telegram-dev:deploy-testnet [script]` | Step-by-step contract deployment to testnet |
 
-### Агенты
+### Agents
 
-`telegram-security-reviewer` (бот, Mini App, платежи), `ton-security-reviewer` (контракты),
-`tolk-test-writer` (тесты на Tolk).
+`telegram-security-reviewer` (bot, Mini App, payments), `ton-security-reviewer` (contracts),
+`tolk-test-writer` (Tolk tests).
 
-### Хуки
+### Hooks
 
-Локальные Node-скрипты, ничего никуда не отправляют:
-- не дают записать токен бота, сид-фразу или приватный ключ в исходники (`.env` исключён);
-- блокируют передачу `MNEMONIC`/`PRIVATE_KEY`/`BOT_TOKEN` прямо в команде, чтение `.env` и
-  `wallets.toml`, `acton wallet export-mnemonic`;
-- блокируют `--net mainnet`, пока пользователь сам не запустил Claude Code с `TON_ALLOW_MAINNET=1`;
-- после правки `.tolk` запускают `acton build` и показывают ошибки компиляции (если Acton есть).
+Local Node scripts that send nothing anywhere:
+- refuse to write a bot token, seed phrase or private key into source files (`.env` is exempt);
+- block passing `MNEMONIC`/`PRIVATE_KEY`/`BOT_TOKEN` inline in a command, reading `.env` and
+  `wallets.toml`, and `acton wallet export-mnemonic`;
+- block `--net mainnet` until the user starts Claude Code with `TON_ALLOW_MAINNET=1` themselves;
+- run `acton build` after a `.tolk` edit and show compile errors (if Acton is installed).
 
-Плагин не содержит MCP-серверов, не хранит кошельки и не подписывает транзакции. Всё, что
-двигает деньги, пользователь подписывает в своём кошельке.
+The plugin ships no MCP servers, holds no wallets and never signs transactions. Anything that
+moves money is signed by the user in their own wallet.
 
-## Требования
+## Requirements
 
-- Claude Code для команд, агентов и хуков; скиллы работают и в других поверхностях Claude.
-- Node.js 22+ для хуков.
-- Для контрактов: [Acton](https://ton-blockchain.github.io/acton/docs/installation) 1.2.0+.
-  **На Windows Acton работает только в WSL (Ubuntu 22.04+).** Без Acton всё остальное работает,
-  а хук сборки молча пропускается.
+- Claude Code for commands, agents and hooks; skills also work in other Claude surfaces.
+- Node.js 22+ for the hooks.
+- For contracts: [Acton](https://ton-blockchain.github.io/acton/docs/installation) 1.2.0+.
+  **On Windows, Acton runs only inside WSL (Ubuntu 22.04+).** Everything else works without
+  Acton; the build hook is skipped silently.
 
-## Установка
+## Installation
 
 ```bash
 /plugin marketplace add daniilganiev/telegram-dev
 /plugin install telegram-dev@telegram-dev-marketplace
 ```
 
-Для разработки плагина:
+For plugin development:
 
 ```bash
 claude --plugin-dir ./telegram-dev
@@ -77,24 +75,26 @@ claude plugin validate .claude-plugin/plugin.json --strict
 node --test test/hooks.test.mjs
 ```
 
-## Проверка качества
+## Does it help?
 
-В `evals/` лежат задачи-ловушки с проверками: Claude решает их с плагином и без. Замер версии 0.3.0
-(по одному прогону на задачу, 6 ловушек): с плагином 0.94, без 0.34. Разница там, где нужны свежие
-факты и правила платформы: Stars вместо крипты для цифровых товаров, приём jetton, актуальный Tolk,
-изменения Bot API 2026 года (эфемерные сообщения, `correct_option_ids`, `sendMessageDraft`). На темах,
-которые Claude и так знает, разницы не было, поэтому скиллы там короткие.
+`evals/` holds trap tasks with graders; Claude solves each one with and without the plugin.
+Version 0.3.0 (6 traps, one run per side): **0.94 with the plugin vs 0.34 without**. The gain is
+where fresh facts and platform rules matter: Stars instead of crypto for digital goods, jetton
+deposits, current Tolk syntax, Bot API changes of 2026 (ephemeral messages, `correct_option_ids`,
+`sendMessageDraft`). On topics Claude already knows well there was no difference, so the skills
+stay short there.
 
-## Безопасность
+## Safety
 
-- TON по умолчанию в testnet, mainnet заблокирован хуком.
-- Сид-фразы, приватные ключи и токены ботов не попадают в чат, логи и репозиторий.
-- Хуки — страховка, а не замена ревью: они ловят типичные ошибки, но не любой обход.
+- TON defaults to testnet; mainnet is blocked by a hook.
+- Seed phrases, private keys and bot tokens never go into the chat, logs or the repo.
+- Hooks are a safety net, not a replacement for review: they catch common mistakes, not every
+  workaround.
 
-## Источники
+## Sources
 
-Откуда взяты сведения и что проверено по первоисточнику: [SOURCES.md](SOURCES.md).
+Where the facts come from and what was checked against primary sources: [SOURCES.md](SOURCES.md).
 
-## Лицензия
+## License
 
 MIT
