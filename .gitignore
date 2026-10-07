@@ -1,0 +1,7 @@
+.env
+.env.*
+*.mnemonic
+wallets.toml
+node_modules/
+research/
+evals/results/

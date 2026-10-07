@@ -1,0 +1,16 @@
+{
+  "name": "telegram-dev-marketplace",
+  "owner": {
+    "name": "daniilganiev"
+  },
+  "metadata": {
+    "description": "Marketplace for the Telegram Dev plugin."
+  },
+  "plugins": [
+    {
+      "name": "telegram-dev",
+      "source": "./",
+      "description": "Build Telegram bots and Mini Apps: Stars payments, Mini App auth, TON Connect and TON payments, with guardrails."
+    }
+  ]
+}

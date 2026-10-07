@@ -1,0 +1,11 @@
+{
+  "name": "telegram-dev",
+  "displayName": "Telegram Dev",
+  "description": "Build Telegram bots and Mini Apps the right way: TypeScript or Python bots, Mini App auth, Stars payments and Telegram's rules for them, TON Connect, TON payments, jettons and NFTs, with guardrails for secrets and mainnet. Community plugin, not affiliated with Telegram.",
+  "version": "0.3.0",
+  "author": { "name": "daniilganiev", "url": "https://github.com/daniilganiev" },
+  "homepage": "https://github.com/daniilganiev/telegram-dev",
+  "repository": "https://github.com/daniilganiev/telegram-dev",
+  "license": "MIT",
+  "keywords": ["telegram", "telegram-bot", "mini-apps", "stars", "payments", "grammy", "aiogram", "ton", "ton-connect", "jetton", "nft", "tolk"]
+}
