@@ -55,18 +55,20 @@ console|junit|...`.
 Wallets live in `wallets.toml` (project, git-ignored) or a global file; local entries override
 global ones. Mnemonic sources, best first: system keyring (`mnemonic-keyring`), environment
 variable (`mnemonic-env`), a file outside git (`mnemonic-file`), plain text (development only).
-Use testnet wallets for experiments and `acton wallet airdrop` for test coins. Acton loads `.env`
+Use testnet wallets for experiments; the user requests test coins with `acton wallet airdrop`. Acton loads `.env`
 automatically and reads `TONCENTER_TESTNET_API_KEY` and `TONCENTER_MAINNET_API_KEY` (one key per
 network) to avoid rate limits. `acton wallet export-mnemonic` prints the seed phrase, so the
 assistant must never run it.
 
 ## Deploy script shape
 
-There is no `acton deploy`; a script deploys. Local first, then testnet:
+There is no `acton deploy`; a script deploys. Claude runs the local emulation; any command with
+`--net`, `acton wallet airdrop` and `acton verify` send transactions or request funds, so the
+user runs them in their own terminal (this plugin's hook blocks them for Claude):
 
 ```bash
-acton script contracts/scripts/deploy.tolk
-acton script contracts/scripts/deploy.tolk --net testnet
+acton script contracts/scripts/deploy.tolk                # Claude: local emulation
+acton script contracts/scripts/deploy.tolk --net testnet  # the user: real testnet broadcast
 ```
 
 Script outline (from the Acton docs; copy the project's generated script instead of

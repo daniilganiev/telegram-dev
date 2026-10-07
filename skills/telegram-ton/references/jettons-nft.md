@@ -62,7 +62,7 @@ and maximum amounts, burn flows, mint by non-admin, and notification spoofing. S
 ## Before mainnet
 
 Run the `ton-security-reviewer` agent and consider an external audit for anything that holds
-value. Source verification: `acton verify` works against the TON verifier on **testnet** and pays
+value. Source verification (the user runs it): `acton verify` works against the TON verifier on **testnet** and pays
 a testnet fee; for mainnet, use https://verifier.ton.org yourself.
 
 ## Display hygiene

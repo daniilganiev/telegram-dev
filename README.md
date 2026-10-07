@@ -88,8 +88,8 @@ Ask Claude in plain language; the plugin's skills load on their own.
   tokens or personal data.
 - **No transactions from Claude.** The plugin never sends a transaction or requests faucet funds:
   `deploy-testnet` prepares and emulates the deployment, gives you the exact command to run in
-  your own terminal, then checks the result on chain. A hook blocks `acton script --net` and
-  `acton wallet airdrop` if Claude tries anyway.
+  your own terminal, then checks the result on chain. A hook blocks `acton script --net`,
+  `acton wallet airdrop` and `acton verify` (it pays a testnet fee) if Claude tries anyway.
 - No telemetry, no MCP servers, no bundled wallets. Details: PRIVACY.md.
 
 ## Requirements

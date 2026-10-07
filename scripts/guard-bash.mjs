@@ -26,7 +26,8 @@ if (readsSecretFile.test(cmd)) {
 }
 
 // 3. Transactions are never sent from Claude: the user runs broadcasts in their own terminal.
-if (/\bacton\s+(?:script\b[^|;&]*--net(?:=|\s+)\S+|wallet\s+airdrop\b)/.test(cmd)) {
+if (/\bacton\s+(?:script\b[^|;&]*--net(?:=|\s+)\S+|wallet\s+airdrop\b)/.test(cmd) ||
+    (/\bacton\s+verify\b/.test(cmd) && !/--dry-run\b/.test(cmd))) {
   block("Blocked: this would send a transaction or request funds. Give the user the exact command to run in their own terminal, then verify the result on chain.");
 }
 const mainnet =
