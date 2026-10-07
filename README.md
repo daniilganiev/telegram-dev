@@ -63,6 +63,11 @@ moves money is signed by the user in their own wallet.
   (core.telegram.org, docs.ton.org, the Acton docs) and write code in your project that calls the
   Telegram Bot API or the public TON Center API. Those requests come from your machine or your
   server, not from the plugin.
+- **Requests Claude makes itself:** while working, Claude may open the public docs above, and
+  `deploy-testnet` (and debugging with `telegram-ton`) asks the public TON Center testnet API about
+  a contract or wallet address to confirm a transaction. Only public addresses are sent; no keys,
+  tokens or personal data. `deploy-testnet` broadcasts a testnet transaction through Acton only
+  after you confirm it; mainnet is never sent from Claude.
 - No telemetry, no MCP servers, no bundled wallets. Details: PRIVACY.md.
 
 ## Requirements
