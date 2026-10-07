@@ -25,8 +25,8 @@ writing boilerplate from memory.
 
 1. `@BotFather` → `/newbot`. The token goes into a backend env var (`BOT_TOKEN`), never into
    the repo, the Mini App bundle or a chat message. A leaked token is revoked in @BotFather.
-2. Commands via `setMyCommands` (up to 32 chars: Latin letters, digits, underscores). Scope
-   them per chat type and language if needed.
+2. Commands via `setMyCommands`: 1-32 characters, only lowercase English letters, digits and
+   underscores (`/Start` or `/my-cmd` are rejected). Scope them per chat type and language if needed.
 3. Mini App entry points: menu button, an inline button with `web_app`, a direct link
    `https://t.me/<bot>/<app>?startapp=<param>` or the main Mini App `https://t.me/<bot>?startapp`.
 

@@ -61,11 +61,12 @@ ask before changing code. For an automated pass run `/telegram-dev:audit-project
 
 ## Growth and money
 
-Options Telegram offers today (terms change, link the official page instead of promising
-numbers): Stars for digital goods and subscriptions, paid media, affiliate programs for bots,
-revenue share from Telegram Ads in large bots and channels, paid broadcasts for high-volume
-messaging, and converting Stars to Toncoin through Fragment. Source:
-https://core.telegram.org/bots and https://telegram.org/tos/bot-developers.
+Options Telegram lists today (terms change, link the official page instead of promising
+numbers): Stars for digital goods and services, subscription plans, paid media, affiliate
+programs with custom revenue share, 50% of the revenue from Telegram Ads shown in the chat with
+the bot, and using earned Stars for higher message limits, gifts to users or rewards in Toncoin.
+Sources: https://core.telegram.org/bots/features#monetization and
+https://telegram.org/tos/bot-developers.
 
 Promotion that doesn't get the bot banned: users opt in before you message them, every broadcast
 has a clear reason and an easy way to stop, no bought audiences, no userbot spam.

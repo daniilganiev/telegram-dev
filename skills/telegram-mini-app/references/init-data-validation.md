@@ -79,9 +79,10 @@ def validate_init_data(init_data: str, bot_token: str, max_age_sec: int = 86400)
     return {"user": json.loads(user) if user else None, "start_param": params.get("start_param")}
 ```
 
-aiogram ships `aiogram.utils.web_app.safe_parse_webapp_init_data(token, init_data)`, and the
-`@tma.js/init-data-node` package does the same for Node; prefer them when the project already
-uses those libraries.
+aiogram ships `aiogram.utils.web_app.safe_parse_webapp_init_data(token, init_data)` (raises
+`ValueError` on a bad signature) and `@tma.js/init-data-node` covers Node; prefer them when the
+project already uses those libraries. aiogram's helper does not reject old data, so check
+`auth_date` yourself.
 
 ## Without the bot token (third parties)
 
