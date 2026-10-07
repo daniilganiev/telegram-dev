@@ -7,5 +7,8 @@
   "homepage": "https://github.com/daniilganiev/telegram-dev",
   "repository": "https://github.com/daniilganiev/telegram-dev",
   "license": "MIT",
+  "documentationUrl": "https://github.com/daniilganiev/telegram-dev#readme",
+  "privacyPolicyUrl": "https://github.com/daniilganiev/telegram-dev/blob/main/PRIVACY.md",
+  "supportUrl": "https://github.com/daniilganiev/telegram-dev/issues",
   "keywords": ["telegram", "telegram-bot", "mini-apps", "stars", "payments", "grammy", "aiogram", "ton", "ton-connect", "jetton", "nft", "tolk"]
 }
