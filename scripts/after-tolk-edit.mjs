@@ -21,7 +21,16 @@ for (let i = 0; i < 20; i++) {
 }
 if (!root) process.exit(0);
 
-const res = spawnSync("acton", ["build"], { cwd: root, encoding: "utf8", timeout: 120000 });
+let res = spawnSync("acton", ["build"], { cwd: root, encoding: "utf8", timeout: 120000 });
+// Acton has no native Windows build; there it usually lives inside WSL.
+if (res.error && process.platform === "win32") {
+  // The script goes through stdin: wsl.exe re-joins argv and loses the quoting.
+  res = spawnSync("wsl.exe", ["--cd", root, "--", "bash", "-ls"], {
+    input: 'A=$(command -v acton || echo "$HOME/.acton/bin/acton"); [ -x "$A" ] || exit 127; "$A" build\n',
+    encoding: "utf8", timeout: 120000,
+  });
+  if (res.status === 127) process.exit(0);
+}
 if (res.error) process.exit(0); // acton not installed: stay silent
 if (res.status !== 0) {
   const out = `${res.stdout || ""}\n${res.stderr || ""}`.trim().split("\n").slice(-40).join("\n");

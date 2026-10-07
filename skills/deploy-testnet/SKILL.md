@@ -1,11 +1,11 @@
 ---
-description: Safely deploy the current Acton project's contract to TON testnet — local emulation first, then testnet broadcast, then on-chain check. Pass the script path as an argument (defaults to scripts/deploy.tolk).
+description: Safely deploy the current Acton project's contract to TON testnet — local emulation first, then testnet broadcast, then on-chain check. Pass the script path as an argument (defaults to contracts/scripts/deploy.tolk).
 disable-model-invocation: true
 ---
 
 # Deploy to TON testnet
 
-Script to deploy: `$ARGUMENTS` (if empty, use `scripts/deploy.tolk`).
+Script to deploy: `$ARGUMENTS` (if empty, use `contracts/scripts/deploy.tolk`, where Acton templates put it; if it is missing, list `*.tolk` files under a `scripts` folder and ask).
 
 Follow these steps in order and stop at the first failure, explaining it to the user.
 

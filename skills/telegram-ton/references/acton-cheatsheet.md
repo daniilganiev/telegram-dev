@@ -65,8 +65,8 @@ assistant must never run it.
 There is no `acton deploy`; a script deploys. Local first, then testnet:
 
 ```bash
-acton script scripts/deploy.tolk
-acton script scripts/deploy.tolk --net testnet
+acton script contracts/scripts/deploy.tolk
+acton script contracts/scripts/deploy.tolk --net testnet
 ```
 
 Script outline (from the Acton docs; copy the project's generated script instead of

@@ -47,7 +47,8 @@ Local Node scripts that send nothing anywhere:
 - block passing `MNEMONIC`/`PRIVATE_KEY`/`BOT_TOKEN` inline in a command, reading `.env` and
   `wallets.toml`, and `acton wallet export-mnemonic`;
 - block `--net mainnet` until the user starts Claude Code with `TON_ALLOW_MAINNET=1` themselves;
-- run `acton build` after a `.tolk` edit and show compile errors (if Acton is installed).
+- run `acton build` after a `.tolk` edit and show compile errors (if Acton is installed; on
+  Windows the hook calls Acton inside WSL).
 
 The plugin ships no MCP servers, holds no wallets and never signs transactions. Anything that
 moves money is signed by the user in their own wallet.

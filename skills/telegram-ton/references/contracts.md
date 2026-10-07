@@ -12,7 +12,7 @@ not supported.** If `acton` isn't found, check this before anything else.
 acton build          # compile
 acton test           # run Tolk tests
 acton check          # lint
-acton script scripts/deploy.tolk   # local emulated deploy, no network
+acton script contracts/scripts/deploy.tolk   # local emulated deploy, no network
 ```
 
 Run `acton help <command>` for exact flags. Don't invent flags; check help first.
