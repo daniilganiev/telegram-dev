@@ -14,9 +14,12 @@ Follow these steps in order and stop at the first failure, explaining it to the 
    `acton build` and `acton test`. Do not continue if tests fail.
 2. **Local emulation.** Run `acton script <script>` without `--net`. Check that the
    printed address, initial state and post-deploy getters look right.
-3. **Wallet check.** Ask the user which testnet wallet to use, or whether to use
-   `--tonconnect`. Never ask for or handle a mnemonic in chat. If they need testnet
-   coins, tell them to use an official testnet faucet.
+3. **Wallet check.** The script names its wallet (for example `scripts.wallet("deployer")`);
+   `acton wallet list` must show that name. If it doesn't, offer `--tonconnect` or a fresh
+   testnet wallet: `acton wallet new --name deployer --version v5r1 --local` (add
+   `--secure false` in WSL, where there is no native key store and the command waits forever),
+   then `acton wallet airdrop deployer` for free testnet GRAM. Never ask for, import or
+   handle a mnemonic from the chat: the same phrase controls the mainnet wallet too.
 4. **API key.** Recommend a TON Center key in the project's `.env` to avoid 429 errors.
 5. **Confirm.** Summarise: network = testnet, script, wallet, value attached. Wait for
    an explicit "yes".

@@ -17,7 +17,7 @@
 - `payments-reviewer` became `telegram-security-reviewer` and also covers the bot and Mini App.
 - `initData` reference fixed: `signature` stays in the HMAC data-check-string; byte-order sort.
 - Evals for the 2026 Bot API traps: `ai-stream-draft`, `ephemeral-group`, `quiz-poll`.
-- Plugin icon (`assets/icon.png`) and `PRIVACY.md`.
+- Privacy policy (PRIVACY.md).
 - Acton flows checked on Acton 1.2.1 in WSL: deploy script path is `contracts/scripts/deploy.tolk`
   (was `scripts/deploy.tolk`); `after-tolk-edit` now runs `acton build` through WSL on Windows.
 

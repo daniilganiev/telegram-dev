@@ -53,6 +53,18 @@ Local Node scripts that send nothing anywhere:
 The plugin ships no MCP servers, holds no wallets and never signs transactions. Anything that
 moves money is signed by the user in their own wallet.
 
+## What the plugin runs, sends and fetches
+
+- **Hooks** (`scripts/`, Node.js) read the tool call Claude is about to make and decide whether to
+  block it. They send nothing over the network and write nothing to disk.
+- **`after-tolk-edit`** runs `acton build` in the edited Acton project; on Windows it runs it through
+  `wsl.exe` inside WSL. Nothing else is executed.
+- **Skills and commands** are instructions. When you ask for it, Claude may read public docs
+  (core.telegram.org, docs.ton.org, the Acton docs) and write code in your project that calls the
+  Telegram Bot API or the public TON Center API. Those requests come from your machine or your
+  server, not from the plugin.
+- No telemetry, no MCP servers, no bundled wallets. Details: PRIVACY.md.
+
 ## Requirements
 
 - Claude Code for commands, agents and hooks; skills also work in other Claude surfaces.

@@ -8,9 +8,9 @@ environment.
 
 Acton ships as one dependency-free binary for macOS (ARM64, x86_64) and Linux (x86_64, ARM64;
 Ubuntu 22.04+ baseline). **Native Windows is not supported: install and run Acton inside WSL
-(Ubuntu 22.04+)**, and run Git in the same WSL distribution. Installer:
-`curl -LsSf https://github.com/ton-blockchain/acton/releases/latest/download/acton-installer.sh | sh`,
-then `acton --version`. WSL, `trunk` and source builds are best-effort.
+(Ubuntu 22.04+)**, and run Git in the same WSL distribution. Install it by following
+https://ton-blockchain.github.io/acton/docs/installation (the user runs the installer
+themselves), then check with `acton --version`. WSL, `trunk` and source builds are best-effort.
 
 Official agent skills (`acton`, `tolk`, `func2tolk`, `ton-blockchain`) live in
 https://github.com/ton-blockchain/skills; install with
