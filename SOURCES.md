@@ -1,59 +1,59 @@
-# Источники
+# Sources
 
-Откуда взяты сведения в скиллах плагина. Проверено в октябре 2026. Всё быстро меняется,
-поэтому скиллы везде отсылают к первоисточнику. Правило плагина: **документация и исходники
-важнее каналов и чатов**; из каналов берутся новости и контекст, а в код и чек-листы попадает
-только то, что подтверждено документацией.
+Where the facts in the plugin's skills come from. Checked in October 2026. Things change fast, so
+the skills always point to the primary source. The plugin's rule: **documentation and source code
+beat channels and chats**. Channels give news and context; only what the documentation confirms
+goes into code and checklists.
 
-## Каналы и чаты
+## Channels and chats
 
-| Источник | Что взято | Надёжность |
+| Source | What was taken | Reliability |
 |---|---|---|
-| [@anatolii_makosov](https://t.me/anatolii_makosov) | Хронология сети (Sub-Second, снижение комиссий, коллаторы), статусы `confirmed` и `finalized`, Streaming API v2, Jetton-2.1-tolk на minter.ton.org, спам-NFT после падения комиссий, Rust-нода экспериментальная, Tolk 1.3/1.4 и Acton | Автор из экосистемы TON; новости и контекст |
-| [@tolk_lang](https://t.me/tolk_lang) | История версий Tolk (0.7 → 1.5), ломающие изменения (`address` только внутренний с 1.2, `ton()` → `grams()`, `bytesN` → `bitsN`), Acton, Actonscan, TON Verifier | Канал языка; версии сверены с changelog в документации |
-| [@toncenter_news](https://t.me/toncenter_news) | Миграция с API v1 на `/api/v3`, Streaming API, декодированные тела сообщений, поля `is_scam` и `is_nsfw`, рекомендация показывать токены по opt-in | Канал TON Center |
-| [github.com/ton-blockchain](https://github.com/ton-blockchain) | Репозитории `ton`, `acton`, `docs`, `TEPs`, `tg-wallet-contract`, `bug-bounty`; официальные skills для агентов | Первоисточник |
-| [ton-blockchain/ton#2575](https://github.com/ton-blockchain/ton/pull/2575) | QUIC в публичных оверлеях вместо RLDP2, нужна нода версии 3.3+ | Касается операторов нод, не разработчиков приложений |
-| [@tondev](https://t.me/tondev) (выгрузка чата) | Повторяющиеся проблемы разработчиков: форматы адресов, коды выхода, bounce, отправка на неразвёрнутый кошелёк, Highload, лимиты API, скам. Использовано только то, что подтверждено документацией | Мнения участников и ответы ИИ-ботов, часть устарела или неверна; сама выгрузка не публикуется (персональные данные) |
-| [gramnews.org: карта экосистемы Q3 2026](https://gramnews.org/ru/articles/ton-ecosystem-map-q3-2026) | Контекст рынка: 373 проекта, 27 категорий, много тап-ботов. В код и чек-листы не вошло | Медиа, цифры не проверялись |
+| [@anatolii_makosov](https://t.me/anatolii_makosov) | Network timeline (sub-second blocks, lower fees, collators), `confirmed` and `finalized` statuses, Streaming API v2, Jetton-2.1-tolk on minter.ton.org, spam NFTs after the fee drop, experimental Rust node, Tolk 1.3/1.4 and Acton | Author from the TON ecosystem; news and context |
+| [@tolk_lang](https://t.me/tolk_lang) | Tolk version history (0.7 → 1.5), breaking changes (`address` is internal-only since 1.2, `ton()` → `grams()`, `bytesN` → `bitsN`), Acton, Actonscan, TON Verifier | The language's channel; versions checked against the changelog in the docs |
+| [@toncenter_news](https://t.me/toncenter_news) | Migration from API v1 to `/api/v3`, Streaming API, decoded message bodies, `is_scam` and `is_nsfw` fields, opt-in display of tokens | TON Center's channel |
+| [github.com/ton-blockchain](https://github.com/ton-blockchain) | Repositories `ton`, `acton`, `docs`, `TEPs`, `tg-wallet-contract`, `bug-bounty`; official agent skills | Primary source |
+| [ton-blockchain/ton#2575](https://github.com/ton-blockchain/ton/pull/2575) | QUIC instead of RLDP2 in public overlays, node 3.3+ required | Concerns node operators, not app developers |
+| [@tondev](https://t.me/tondev) (chat export) | Recurring developer problems: address formats, exit codes, bounces, sending to an undeployed wallet, Highload wallets, API limits, scams. Only what the docs confirm was used | Opinions and AI-bot answers, partly outdated or wrong; the export itself is not published (personal data) |
+| [gramnews.org: ecosystem map Q3 2026](https://gramnews.org/ru/articles/ton-ecosystem-map-q3-2026) | Market context: 373 projects, 27 categories, many tap-to-earn bots. Not used in code or checklists | Media, figures not verified |
 
-## Документация (первоисточники)
+## Documentation (primary sources)
 
-- TON: https://docs.ton.org (Tolk, TON Connect и `ton_proof`, платежи Gram и jetton, Streaming
-  API и API v2/v3, лимиты TON Center, стандарты jetton и NFT, безопасность контрактов, коды
-  выхода TVM, форматы адресов). Текст страниц доступен в markdown по адресам вида
-  `https://docs.ton.org/llms/<раздел>/content.md`; индекс: https://docs.ton.org/llms.txt
-- Acton: https://ton-blockchain.github.io/acton/docs (команды, тесты, кошельки, деплой,
-  верификация, установка и WSL); индекс: https://ton-blockchain.github.io/acton/llms.txt
+- TON: https://docs.ton.org (Tolk, TON Connect and `ton_proof`, Gram and jetton payments,
+  Streaming API and API v2/v3, TON Center limits, jetton and NFT standards, contract security,
+  TVM exit codes, address formats). Pages are available as markdown at
+  `https://docs.ton.org/llms/<section>/content.md`; index: https://docs.ton.org/llms.txt
+- Acton: https://ton-blockchain.github.io/acton/docs (commands, tests, wallets, deployment,
+  verification, installation and WSL); index: https://ton-blockchain.github.io/acton/llms.txt
 - Telegram: https://core.telegram.org/bots, `/bots/features`, `/bots/faq`, `/bots/api`,
   `/bots/api-changelog`, `/bots/webapps`, `/bots/payments-stars`, `/bots/payments`
-- Клиенты Telegram: https://telegram.org/apps (для матрицы тестирования Mini App)
-- Публикация плагина: https://claude.com/docs/directory/publish,
+- Telegram clients: https://telegram.org/apps (for the Mini App test matrix)
+- TON Center API v3 (hosts, per-network keys, pagination, error codes):
+  https://docs.ton.org/api/v3/overview
+- Official TON skills for deep contract work: https://github.com/ton-blockchain/skills
+- Publishing a plugin: https://claude.com/docs/directory/publish,
   https://claude.com/docs/plugins/pre-submission-checklist,
   https://code.claude.com/docs/en/plugins/manifest-reference
-- TON Center API v3 (хосты, ключи по сетям, пагинация, коды ошибок):
-  https://docs.ton.org/api/v3/overview
-- Официальные skills TON для глубокой работы с контрактами: https://github.com/ton-blockchain/skills
-- Статья-основа: https://claude.com/blog/build-plugins-for-claude
+- Background: https://claude.com/blog/build-plugins-for-claude
 
-## Что проверено по первоисточнику и изменило плагин
+## Checked against primary sources and changed the plugin
 
-- Цифровые товары внутри Telegram: **только Stars**, крипта запрещена (Telegram, `payments-stars`).
-- `ton_proof`: ограничения длины payload, обязательная проверка сети, одноразовый nonce.
-- Платежи: белый список jetton-мастеров, `forward_ton_amount` не меньше 1 нано-единицы,
-  поиск сообщения по BOC только для UX, Streaming не восстанавливает пропущенное.
-- Tolk: настоящий синтаксис (`struct (0x…)`, `else =>`, `BounceMode`, `grams()`).
-- Acton: **нативный Windows не поддерживается (только WSL)**; `acton verify` работает только в
-  testnet и платит за верификацию.
-- `@ton/mcp` по умолчанию идёт в mainnet и хранит кошельки в обфусцированном реестре; поэтому
-  с версии 0.3.0 плагин его не поставляет и читает сеть через публичное API TON Center.
-- Лимиты Bot API и платные рассылки (FAQ Telegram).
-- `initData`: для HMAC убирается только `hash`, поле `signature` остаётся в строке; для проверки
-  без токена строка начинается с `<bot_id>:WebAppData` и без `hash` и `signature` (`/bots/webapps`).
-- Изменения Bot API 9.4–10.3 (2026): боты видят часть сообщений других ботов в группах (10.0),
-  `sendMessageDraft` живёт около 30 секунд и требует финального `sendMessage`, эфемерные
-  сообщения перешли на `ephemeral_message_parameters` (10.3), `correct_option_ids` в опросах (9.6),
-  managed bots (9.6), guest mode (10.0), запрет cross-origin вызовов Mini App с 20.07.2026 (10.2),
-  обновления `subscription` (10.2), платные медиа до 25000 Stars.
-
-Полные копии страниц лежат локально в `research/` (в git не попадают).
+- Digital goods inside Telegram: **Stars only**, crypto is not allowed (Telegram, `payments-stars`).
+- `ton_proof`: payload length limits, mandatory network check, one-time nonce.
+- Payments: allowlist of jetton masters, `forward_ton_amount` of at least 1 nano unit, message
+  lookup by BOC for UX only, the Streaming API doesn't replay missed events.
+- Tolk: real syntax (`struct (0x…)`, `else =>`, `BounceMode`, `grams()`).
+- Acton: **native Windows is not supported (WSL only)**; `acton verify` works on testnet only and
+  charges for verification.
+- `@ton/mcp` defaults to mainnet and keeps wallets in an obfuscated registry; since 0.3.0 the
+  plugin doesn't ship it and reads the chain through the public TON Center API instead.
+- Bot API limits and paid broadcasts (Telegram FAQ).
+- `initData`: for the HMAC check only `hash` is removed and `signature` stays in the string; for
+  verification without the token the string starts with `<bot_id>:WebAppData` and excludes both
+  `hash` and `signature` (`/bots/webapps`).
+- Bot API 9.4–10.3 (2026): bots see some messages from other bots in groups (10.0),
+  `sendMessageDraft` lives about 30 seconds and needs a final `sendMessage`, ephemeral messages
+  moved to `ephemeral_message_parameters` (10.3), `correct_option_ids` in polls and
+  `allows_multiple_answers` for quizzes (9.6), managed bots (9.6), guest mode (10.0), Mini App
+  cross-origin calls blocked since 20 July 2026 (10.2), `subscription` updates (10.2), paid media up
+  to 25000 Stars.
