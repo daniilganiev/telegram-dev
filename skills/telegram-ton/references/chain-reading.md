@@ -13,9 +13,9 @@ Sources: https://docs.ton.org/api/v3/overview, `.../api/v3/authentication`,
 | Mainnet | `https://toncenter.com/api/v3` |
 | Testnet | `https://testnet.toncenter.com/api/v3` |
 
-- Without a key: about **1 request per second**. With a key, send `X-API-Key: <key>` (or
-  `?api_key=`). Keys are **per network**: a testnet key on mainnet returns `403 Network not
-  allowed`.
+- Without a key: about **1 request per second**. A key raises the limit; the backend passes it
+  as the docs describe (https://docs.ton.org/api/v3/authentication). Keys are **per network**: a testnet
+  key on mainnet returns `403 Network not allowed`.
 - `401` is a wrong key, `429` is the rate limit: back off exponentially, don't retry in a loop.
 - The key belongs on the backend (env var). Never put it in the Mini App bundle.
 

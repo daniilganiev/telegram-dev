@@ -7,9 +7,9 @@ description: Build, host and automate Telegram bots in TypeScript (grammY) or Py
 
 The Bot API changes every month or two (10.3 in August 2026). Before using any method or field
 you are not sure about, check https://core.telegram.org/bots/api-changelog. Frameworks lag behind
-the API; when a framework has no wrapper yet, call the method directly (`bot.api.raw.<method>`
-in grammY, or a plain POST to `https://api.telegram.org/bot<token>/<method>`) instead of
-inventing a wrapper that doesn't exist.
+the API; when a framework has no wrapper yet, call the method through the framework's raw
+API (`bot.api.raw.<method>` in grammY, a custom `TelegramMethod` in aiogram) instead of inventing
+a wrapper that doesn't exist.
 
 ## Stack
 

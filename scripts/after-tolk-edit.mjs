@@ -26,7 +26,7 @@ let res = spawnSync("acton", ["build"], { cwd: root, encoding: "utf8", timeout: 
 if (res.error && process.platform === "win32") {
   // The script goes through stdin: wsl.exe re-joins argv and loses the quoting.
   res = spawnSync("wsl.exe", ["--cd", root, "--", "bash", "-ls"], {
-    input: 'A=$(command -v acton || echo "$HOME/.acton/bin/acton"); [ -x "$A" ] || exit 127; "$A" build\n',
+    input: 'PATH="$HOME/.acton/bin:$PATH"; command -v acton >/dev/null || exit 127; acton build\n',
     encoding: "utf8", timeout: 120000,
   });
   if (res.status === 127) process.exit(0);

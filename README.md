@@ -85,12 +85,11 @@ For plugin development:
 ```bash
 claude --plugin-dir ./telegram-dev
 claude plugin validate .claude-plugin/plugin.json --strict
-node --test test/hooks.test.mjs
 ```
 
 ## Does it help?
 
-`evals/` holds trap tasks with graders; Claude solves each one with and without the plugin.
+The author tested the plugin on trap tasks, solving each one with and without the plugin.
 Version 0.3.0 (6 traps, one run per side): **0.94 with the plugin vs 0.34 without**. The gain is
 where fresh facts and platform rules matter: Stars instead of crypto for digital goods, jetton
 deposits, current Tolk syntax, Bot API changes of 2026 (ephemeral messages, `correct_option_ids`,

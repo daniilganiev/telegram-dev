@@ -7,15 +7,13 @@ plus recurring problems seen in developer communities (marked "reported").
 
 The wallet fetches `tonconnect-manifest.json` over HTTPS **from any origin, without
 authentication**. Failures surface as `MANIFEST_NOT_FOUND_ERROR` (code 2) or
-`MANIFEST_CONTENT_ERROR` (code 3). Test from outside your network:
-
-```bash
-curl -i https://yourapp.com/tonconnect-manifest.json
-curl -i -H 'Origin: https://wallet.example.com' https://yourapp.com/tonconnect-manifest.json
-```
+`MANIFEST_CONTENT_ERROR` (code 3). Open the manifest URL from outside your network (a phone
+on mobile data works) and check the response in the browser's network panel, once plainly and
+once from a page on another domain.
 
 Expect 200, `Content-Type: application/json`, `Access-Control-Allow-Origin: *` (or the request
-origin) and a body with `url`, `name`, `iconUrl`. Don't test with `curl -I` (HEAD).
+origin) and a body with `url`, `name`, `iconUrl`. Check with a GET request; a HEAD request can
+answer differently.
 
 Common causes:
 

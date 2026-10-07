@@ -16,7 +16,7 @@
 - New commands `add-payments` and `add-ton-connect`; `new-mini-app` works with or without TON.
 - `payments-reviewer` became `telegram-security-reviewer` and also covers the bot and Mini App.
 - `initData` reference fixed: `signature` stays in the HMAC data-check-string; byte-order sort.
-- Evals for the 2026 Bot API traps: `ai-stream-draft`, `ephemeral-group`, `quiz-poll`.
+- Evals and hook tests moved out of the published plugin (kept by the author).
 - Privacy policy (PRIVACY.md).
 - Mainnet commands are now always blocked in Claude (no `TON_ALLOW_MAINNET` opt-in); the user
   runs them in their own terminal.
@@ -33,7 +33,7 @@
   before broadcasting transactions or touching wallet keys through the MCP server.
 - TON Center key is now a plugin setting (`toncenter_api_key`, stored securely) instead of
   being read from the user's environment.
-- Hook tests in `test/hooks.test.mjs`.
+- Hook tests.
 - Content re-checked against the original docs (TON, Acton, Telegram) instead of summaries:
   `ton_proof` verification details, jetton and Gram payment processing, finality model, real
   Tolk syntax and version notes, official TON security guide, TON Connect troubleshooting,
