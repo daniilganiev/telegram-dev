@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.1 — 2026-11-15
+- Removed hooks and the Node scripts in `scripts/` (directory rules). Their checks are now rules
+  in the skills: no secrets in source or commands, no reading `.env`/`wallets.toml`, no
+  transactions or faucet requests from Claude, `acton build` after `.tolk` edits.
+- Removed `.gitattributes`.
+- Bot API 10.4: new `telegram-ton/references/widgets.md` (HTML widgets with Telegram's TON wallet,
+  blocked for general bots in production since 13 November 2026; the Stars rule still applies),
+  10.4 changes in `telegram-bot` (ephemeral replies to callbacks in any chat, other additions).
+- TON Connect UI 3.1 / 5.0: typed errors and `error.name` in the troubleshooting reference.
+- Safety rules also in the skill descriptions (always in context) and in the three agents;
+  `telegram-bot` explains how to debug token errors without opening `.env`.
+- README: eval numbers from the run with the same environment for both sides (1.00 vs 0.70).
+
 ## 0.3.0 — 2026-10-07
 - Renamed to `telegram-dev`: Telegram first, TON only where it meets Telegram.
 - Removed the bundled `@ton/mcp` server, the `toncenter_api_key` setting and the MCP send

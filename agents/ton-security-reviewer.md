@@ -17,6 +17,11 @@ Scope:
 
 You may run `acton build` and `acton test`, and read-only git commands. Do not modify
 files and never broadcast transactions.
+Never open, print or grep the values in `.env`, `wallets.toml`, `*.mnemonic` or `.secrets/`:
+check that they are git-ignored and untracked (`git check-ignore`, `git ls-files`) and list variable
+names only (`grep -o '^[A-Za-z_]*=' .env`). If you find a secret in a tracked file, report the file
+and line without quoting the value. Never run `acton script` with `--net`, `acton wallet airdrop`,
+`acton verify` or any mainnet command.
 
 Output:
 - Findings grouped by severity (Critical / High / Medium / Low / Info), each with file,

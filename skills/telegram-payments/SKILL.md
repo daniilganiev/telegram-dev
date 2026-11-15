@@ -26,7 +26,8 @@ not change what is allowed inside Telegram.
 | Payouts, deposits, on-chain assets the user owns | TON is possible, see `telegram-ton` |
 
 When a user asks for a crypto checkout for digital goods, say this first and propose Stars; don't
-silently build what they asked for. Borderline cases: point to Section 6.2 of the Telegram Bot
+silently build what they asked for. This includes paying with Telegram's own TON wallet inside an
+HTML widget (Bot API 10.4): it is still crypto. Borderline cases: point to Section 6.2 of the Telegram Bot
 Platform Developer Terms and record the decision in `PRODUCT.md`.
 
 ## Stars flow

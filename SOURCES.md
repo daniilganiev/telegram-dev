@@ -57,3 +57,12 @@ goes into code and checklists.
   `allows_multiple_answers` for quizzes (9.6), managed bots (9.6), guest mode (10.0), Mini App
   cross-origin calls blocked since 20 July 2026 (10.2), `subscription` updates (10.2), paid media up
   to 25000 Stars.
+- Bot API 10.4 (9 November 2026), checked 15 November 2026: HTML widgets with requests and the TON
+  wallet (`sendTransaction`, `signData` for domain `bot<bot_id>`), limits and sandbox
+  (core.telegram.org/bots/widgets); general bots blocked from widgets in production since
+  13 November 2026 (tdlib/telegram-bot-api issue 947, reply by levlam); `TonWalletCard`,
+  `TonWalletTransfer`, optional `receiver_user_id` for ephemeral replies, `AreaPosition`.
+  Developer Terms Section 6.2 unchanged: digital goods only in Stars.
+- `@tonconnect/ui` 3.1.0 / 5.0.0 (October 2026): typed errors with class names, 5.0 is a version
+  alignment with the same code (package CHANGELOG, `UserRejectsError` exported from the SDK).
+- Unchanged on 15 November 2026: Tolk 1.5, Acton 1.2.1, Mini Apps (last change in 10.1).

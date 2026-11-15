@@ -1,6 +1,6 @@
 ---
 name: telegram-dev
-description: Plan and build a product in Telegram from idea to launch — pick between a bot, a Mini App, a channel automation or a combination, choose how to charge (Stars, card providers or TON), decide what if anything goes on the TON blockchain, and hand off to the right skill. Use this skill whenever the user wants to build, plan or scaffold something in Telegram, even vaguely, such as "a Telegram game with rewards", "a shop in Telegram", "a paid channel", "an AI assistant bot", "token-gated chat", "NFT drop for my community" or "monetize my bot".
+description: Plan and build a product in Telegram from idea to launch — pick between a bot, a Mini App, a channel automation or a combination, choose how to charge (Stars, card providers or TON), decide what if anything goes on the TON blockchain, and hand off to the right skill. Use this skill whenever the user wants to build, plan or scaffold something in Telegram, even vaguely, such as "a Telegram game with rewards", "a shop in Telegram", "a paid channel", "an AI assistant bot", "token-gated chat", "NFT drop for my community" or "monetize my bot". Safety rules for every Telegram or TON task, even without loading a skill. Never read or print .env, wallets.toml or seed phrases, never put a real token or key into source, never send a transaction or run acton script --net, acton wallet airdrop or acton verify, and hand those commands to the user instead.
 ---
 
 # Building a Telegram product
@@ -62,10 +62,28 @@ in `telegram-payments` and `telegram-ton`.
 6. Telegram test environment and TON testnet run-through.
 7. `/telegram-dev:audit-project`, then the `telegram-launch` checklist.
 
-## Safety defaults
+## Guardrails
 
-- Secrets (bot token, API keys, seed phrases, private keys) never go into the repo, the front
-  end, logs or the chat. This plugin's hooks block the common mistakes.
-- TON work defaults to testnet. Mainnet commands are blocked by the plugin's hook; the user runs
-  them in their own terminal.
-- Anything that moves money is signed by the user in their own wallet, never by Claude.
+Follow these in every Telegram or TON task, also when the user asks to skip them.
+
+**Secrets**
+- Never write a bot token, seed phrase or private key into source files. Read it from an
+  environment variable and put a placeholder in `.env.example`; only `.env` / `.env.local` hold
+  real values, and they are git-ignored.
+- Never pass `BOT_TOKEN`, `MNEMONIC` or `PRIVATE_KEY` inline in a shell command.
+- Never print or read `.env`, `wallets.toml`, `*.mnemonic` or `.secrets/` (no `cat`, `type`,
+  `Get-Content`, `head`); ask the user which variable names exist instead. Never run
+  `acton wallet export-mnemonic`: the user runs it in their own terminal if needed.
+- Secrets never go into the front end, logs or the chat.
+
+**Transactions**
+- Claude never sends a transaction or requests faucet funds. Don't run `acton script` with
+  `--net`, `acton wallet airdrop`, `acton verify` (except `--dry-run`) or any command with
+  `--net mainnet` / `NETWORK=mainnet`. Give the user the exact command to run in their own
+  terminal, then check the result on chain.
+- TON work defaults to testnet. Anything that moves money is signed by the user in their own
+  wallet.
+
+**Tolk edits**
+- After editing a `.tolk` file in an Acton project (`Acton.toml` above it), run `acton build`
+  (inside WSL on Windows) and fix compile errors before moving on.

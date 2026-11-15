@@ -1,11 +1,11 @@
 ---
 name: telegram-bot
-description: Build, host and automate Telegram bots in TypeScript (grammY) or Python (aiogram, python-telegram-bot) — BotFather setup, webhooks vs long polling, commands, deep links, keyboards, groups and channels, broadcasts and rate limits, AI bots that stream replies, Business bots, managed bots, guest mode, ephemeral messages and launching a Mini App. Use this skill whenever the user creates or edits a Telegram bot, asks about BotFather, a bot token, webhooks, getUpdates, bot commands, start parameters, mass messaging, posting to a channel on a schedule, a support or AI chat bot, or hosting a bot on Vercel, a VPS or another serverless platform.
+description: Build, host and automate Telegram bots in TypeScript (grammY) or Python (aiogram, python-telegram-bot) — BotFather setup, webhooks vs long polling, commands, deep links, keyboards, groups and channels, broadcasts and rate limits, AI bots that stream replies, Business bots, managed bots, guest mode, ephemeral messages and launching a Mini App. Use this skill whenever the user creates or edits a Telegram bot, asks about BotFather, a bot token, webhooks, getUpdates, bot commands, start parameters, mass messaging, posting to a channel on a schedule, a support or AI chat bot, or hosting a bot on Vercel, a VPS or another serverless platform. Safety rule even without loading this skill. Never open, cat or print .env to debug a token (check variable names only with grep -o '^[A-Za-z_]*=' .env) and never write a real token into source files.
 ---
 
 # Telegram bot
 
-The Bot API changes every month or two (10.3 in August 2026). Before using any method or field
+The Bot API changes every month or two (10.4 in November 2026). Before using any method or field
 you are not sure about, check https://core.telegram.org/bots/api-changelog. Frameworks lag behind
 the API; when a framework has no wrapper yet, call the method through the framework's raw
 API (`bot.api.raw.<method>` in grammY, a custom `TelegramMethod` in aiogram) instead of inventing
@@ -25,6 +25,13 @@ writing boilerplate from memory.
 
 1. `@BotFather` → `/newbot`. The token goes into a backend env var (`BOT_TOKEN`), never into
    the repo, the Mini App bundle or a chat message. A leaked token is revoked in @BotFather.
+   Claude never writes a real token into source, passes it inline in a command or reads `.env`
+   to see it; code reads `process.env.BOT_TOKEN` / `os.environ["BOT_TOKEN"]`.
+   **Debugging 401 / token errors without seeing the token:** list variable names only
+   (`grep -o '^[A-Za-z_]*=' .env`), compare them with what the code reads, check that something
+   loads `.env` (`dotenv`, `--env-file`, the host's env settings). If the value itself may be
+   wrong, ask the user to call `getMe` with it in their own terminal or to revoke it in
+   @BotFather and paste the new one into `.env` themselves.
 2. Commands via `setMyCommands`: 1-32 characters, only lowercase English letters, digits and
    underscores (`/Start` or `/my-cmd` are rejected). Scope them per chat type and language if needed.
 3. Mini App entry points: menu button, an inline button with `web_app`, a direct link
@@ -76,7 +83,17 @@ Source: https://core.telegram.org/bots/faq (Telegram says the values may change)
   `sendRichMessage` / `sendRichMessageDraft` (10.1).
 - **Ephemeral messages** (visible to one user in a group): introduced in 10.2 with
   `receiver_user_id` and `callback_query_id`; in **10.3 these were replaced** by
-  `ephemeral_message_parameters`. Use the 10.3 shape.
+  `ephemeral_message_parameters`. Use the 10.3 shape. Since 10.4 `receiver_user_id` and
+  `chat_id` are optional: pass only `callback_query_id` to reply ephemerally to a button press
+  in any chat except channel direct messages.
+- **HTML widgets** (10.4): `sendWidget` puts a small sandboxed app into a message, with requests
+  to the bot and Telegram's TON wallet. Since 13 November 2026 general bots get
+  `INPUT_MEDIA_WIDGET_NOT_ALLOWED` in production; only the test server works. See
+  `telegram-ton/references/widgets.md` before building one.
+- **Other 10.4 additions:** `getUniqueGift`, `deleteBusinessAccountGift`, message entities
+  `ton_address` and `bank_card_number`, `StoryAreaPosition` renamed to `AreaPosition`; Premium
+  users can give up to 2 of their bots a second username ending in `agent`, `ai`, `app`, `game`
+  or `gay`.
 - **Polls.** `correct_option_id` became `correct_option_ids` (9.6); quizzes may now have several
   correct answers and accept `allows_multiple_answers`. Options are `InputPollOption` objects.
 - **Guest mode** (10.0): a bot can answer in chats it isn't a member of via

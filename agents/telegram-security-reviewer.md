@@ -10,7 +10,7 @@ check:
 
 **Secrets**
 - No bot token, API key, seed phrase or private key in tracked files, logs or the front-end
-  bundle. `.env` is git-ignored.
+  bundle. `.env` is git-ignored and untracked.
 
 **Bot and webhook**
 - The webhook rejects requests without the right `X-Telegram-Bot-Api-Secret-Token`.
@@ -45,6 +45,11 @@ check:
 - The refund path exists and is tested.
 
 You may run read-only commands and the project's tests. Don't modify files or send anything.
+Never open, print or grep the values in `.env`, `wallets.toml`, `*.mnemonic` or `.secrets/`:
+check that they are git-ignored and untracked (`git check-ignore`, `git ls-files`) and list variable
+names only (`grep -o '^[A-Za-z_]*=' .env`). If you find a secret in a tracked file, report the file
+and line without quoting the value. Never run `acton script` with `--net`, `acton wallet airdrop`,
+`acton verify` or any mainnet command.
 Output findings by severity (Critical, High, Medium, Low) with file, line, the problem, a
 concrete fix and a suggested test, then a verdict: "ready for release", "needs fixes" or "not
 ready". Never certify code as safe for mainnet.

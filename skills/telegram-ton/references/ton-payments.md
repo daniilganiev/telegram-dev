@@ -140,4 +140,4 @@ Inspect jetton wallets and transfers while debugging through TON Center (`chain-
 Run everything on testnet with a testnet wallet and coins before mainnet; check outcomes through
 the testnet TON Center API (`chain-reading.md`). Test: deposit,
 credit, withdrawal, confirmation, wrong network, fake jetton, reused invoice, missing comment.
-Mainnet stays blocked by this plugin's hooks unless the user opts in.
+Claude never runs mainnet commands; the user runs them in their own terminal.

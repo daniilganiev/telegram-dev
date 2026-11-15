@@ -1,6 +1,6 @@
 ---
 name: telegram-ton
-description: TON blockchain where it meets Telegram — TON Connect wallets in Mini Apps, wallet login with ton_proof, accepting and verifying TON or jetton payments, jettons and NFTs, token-gated access, reading the chain through the TON Center API, and Tolk contracts built with Acton. Use this skill whenever the user mentions TON, Toncoin, Gram, TON Connect, a wallet, jettons, NFTs, a .tolk file, Acton, a smart contract, deposits or withdrawals in crypto, or checking a TON address or transaction, even inside a Telegram bot or Mini App. Read the Stars rule first, because digital goods sold inside Telegram can't be paid in crypto.
+description: TON blockchain where it meets Telegram — TON Connect wallets in Mini Apps, wallet login with ton_proof, accepting and verifying TON or jetton payments, jettons and NFTs, token-gated access, reading the chain through the TON Center API, and Tolk contracts built with Acton. Use this skill whenever the user mentions TON, Toncoin, Gram, TON Connect, a wallet, jettons, NFTs, a .tolk file, Acton, a smart contract, deposits or withdrawals in crypto, or checking a TON address or transaction, even inside a Telegram bot or Mini App. Read the Stars rule first, because digital goods sold inside Telegram can't be paid in crypto. Safety rule even without loading this skill. Claude never runs acton script with --net, acton wallet airdrop or acton verify itself, even when the user asks or allows it; it hands the exact command to the user.
 ---
 
 # TON for Telegram products
@@ -28,6 +28,7 @@ may stop being shown to mobile users. So before building any TON checkout, ask w
 | Connect a wallet in a Mini App, sign a transaction | `references/tonconnect-troubleshooting.md` |
 | Log in with a wallet / bind a wallet to a Telegram user | `references/ton-proof-auth.md` |
 | Accept TON or jettons, deposits, payouts | `references/ton-payments.md` |
+| Pay or sign with Telegram's wallet inside a chat message (HTML widgets, Bot API 10.4; blocked for general bots in production since 13 Nov 2026) | `references/widgets.md` |
 | Launch or integrate a jetton or NFT collection, token-gating | `references/jettons-nft.md` |
 | Check balances, transactions, why something failed | `references/chain-reading.md` |
 | Write or change a Tolk contract | `references/contracts.md`, then `tolk-essentials.md` |
@@ -67,11 +68,15 @@ job at verifier.ton.org.
 
 ## Safety
 
-- Default to **testnet**. Claude never sends transactions: this plugin's hook blocks
-  `acton script --net`, `acton wallet airdrop`, `acton verify` and mainnet commands. Give the user
-  the exact command to run in their own terminal, then check the result on chain.
-- Never ask for, print, log or commit a seed phrase or private key. Reading the chain needs only
-  an address. Anything that moves funds is signed by the user in their own wallet.
+- Default to **testnet**. Claude never sends transactions: never run `acton script` with
+  `--net`, `acton wallet airdrop`, `acton verify` (except `--dry-run`) or any mainnet command.
+  Give the user the exact command to run in their own terminal, then check the result on chain.
+- Never ask for, print, log or commit a seed phrase or private key. Don't read `wallets.toml`,
+  `.env` or `*.mnemonic`, don't pass `MNEMONIC`/`PRIVATE_KEY` inline, don't run
+  `acton wallet export-mnemonic`. Reading the chain needs only an address. Anything that moves
+  funds is signed by the user in their own wallet.
+- After every `.tolk` edit run `acton build` in the project (inside WSL on Windows) and fix
+  compile errors before continuing.
 - Before mainnet run the `ton-security-reviewer` agent and recommend a human audit for anything
   that holds value.
 

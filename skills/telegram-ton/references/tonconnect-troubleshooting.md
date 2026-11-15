@@ -38,6 +38,11 @@ Common causes:
 | 300 | `USER_REJECTS_ERROR` | The user cancelled; not a system error, let them retry |
 | 400 | `METHOD_NOT_SUPPORTED` | Wallet lacks the feature (`SendTransaction`, `SignData`, structured `items`, `ton_proof` item). Filter wallets with `walletsRequiredFeatures` or fall back |
 
+Since `@tonconnect/ui` 3.1.0 (same code as 5.0.0, October 2026) UI errors carry their class
+name in `error.name` instead of `"Error"`, and a wallet rejection arrives as a typed
+`UserRejectsError` instead of `TonConnectUIError: Unhandled error`. Check with `instanceof`,
+not by comparing `error.name` with `"Error"` or by parsing messages.
+
 Bridge unreachable: the SDK retries the SSE channel every 2 s and `POST /message` every 5 s;
 show a "connection problem" state and offer to reconnect. Methods take an `AbortSignal`.
 

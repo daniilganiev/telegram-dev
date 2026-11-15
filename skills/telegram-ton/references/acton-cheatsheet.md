@@ -64,7 +64,7 @@ assistant must never run it.
 
 There is no `acton deploy`; a script deploys. Claude runs the local emulation; any command with
 `--net`, `acton wallet airdrop` and `acton verify` send transactions or request funds, so the
-user runs them in their own terminal (this plugin's hook blocks them for Claude):
+user runs them in their own terminal, never Claude:
 
 ```bash
 acton script contracts/scripts/deploy.tolk                # Claude: local emulation

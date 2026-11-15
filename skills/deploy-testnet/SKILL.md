@@ -31,4 +31,5 @@ Follow these steps in order and stop at the first failure, explaining it to the 
 7. **Report.** Give the user the contract address, a testnet explorer link, and next
    steps (wire the address into the Mini App config, run the security review).
 
-Never run `acton script` with `--net` from this skill; the plugin's hook blocks it anyway.
+Never run `acton script` with `--net`, `acton wallet airdrop` or `acton verify` from this skill,
+even if the user asks: hand over the command instead.

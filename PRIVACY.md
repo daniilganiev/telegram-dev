@@ -1,15 +1,12 @@
 # Privacy policy
 
-Last updated: 7 October 2026.
+Last updated: 15 November 2026.
 
-Telegram Dev is a plugin made of instructions (skills, commands, agents) and local hook scripts.
+Telegram Dev is a plugin made only of instructions (skills, commands, agents). It contains no scripts
+or hooks and executes nothing by itself.
 
 - **No data collection.** The plugin has no server, no analytics and no telemetry. It doesn't
   collect, store or send any personal data, code or usage information.
-- **Hooks run locally.** The scripts in `scripts/` read the tool call Claude is about to make
-  (a command or a file write), decide whether to block it, and exit. They make no network
-  requests and write nothing to disk. `after-tolk-edit` runs `acton build` in your project if
-  Acton is installed (on Windows, through WSL).
 - **No MCP servers and no wallets.** The plugin doesn't hold keys, seed phrases or bot tokens.
   It never sends transactions or requests faucet funds: for deployments it gives you the
   command to run in your own terminal.

@@ -40,16 +40,15 @@ Mini Apps с проверкой `initData` на сервере, платежи �
 `telegram-security-reviewer` (bot, Mini App, payments), `ton-security-reviewer` (contracts),
 `tolk-test-writer` (Tolk tests).
 
-### Hooks
+### Guardrails
 
-Local Node scripts that send nothing anywhere:
-- refuse to write a bot token, seed phrase or private key into source files (`.env` is exempt);
-- block passing `MNEMONIC`/`PRIVATE_KEY`/`BOT_TOKEN` inline in a command, reading `.env` and
-  `wallets.toml`, and `acton wallet export-mnemonic`;
-- block any transaction broadcast (`acton script --net`, mainnet commands) and faucet requests:
-  the user runs those in their own terminal;
-- run `acton build` after a `.tolk` edit and show compile errors (if Acton is installed; on
-  Windows the hook calls Acton inside WSL).
+Rules built into the skills (`telegram-dev`, `telegram-ton`, `telegram-bot`, `deploy-testnet`):
+- no bot token, seed phrase or private key in source files (`.env` holds real values);
+- no `MNEMONIC`/`PRIVATE_KEY`/`BOT_TOKEN` inline in a command, no reading `.env` or
+  `wallets.toml`, no `acton wallet export-mnemonic`;
+- no transaction broadcast (`acton script --net`, mainnet commands) and no faucet requests from
+  Claude: the user runs those in their own terminal;
+- `acton build` after a `.tolk` edit, with compile errors fixed before moving on.
 
 The plugin ships no MCP servers, holds no wallets and never signs transactions. Anything that
 moves money is signed by the user in their own wallet.
@@ -74,10 +73,7 @@ Ask Claude in plain language; the plugin's skills load on their own.
 
 ## What the plugin runs, sends and fetches
 
-- **Hooks** (`scripts/`, Node.js) read the tool call Claude is about to make and decide whether to
-  block it. They send nothing over the network and write nothing to disk.
-- **`after-tolk-edit`** runs `acton build` in the edited Acton project; on Windows it runs it through
-  `wsl.exe` inside WSL. Nothing else is executed.
+- **No scripts or hooks.** The plugin is only Markdown and JSON; it executes nothing by itself.
 - **Skills and commands** are instructions. When you ask for it, Claude may read public docs
   (core.telegram.org, docs.ton.org, the Acton docs) and write code in your project that calls the
   Telegram Bot API or the public TON Center API. Those requests come from your machine or your
@@ -88,17 +84,16 @@ Ask Claude in plain language; the plugin's skills load on their own.
   tokens or personal data.
 - **No transactions from Claude.** The plugin never sends a transaction or requests faucet funds:
   `deploy-testnet` prepares and emulates the deployment, gives you the exact command to run in
-  your own terminal, then checks the result on chain. A hook blocks `acton script --net`,
-  `acton wallet airdrop` and `acton verify` (it pays a testnet fee) if Claude tries anyway.
+  your own terminal, then checks the result on chain. The skills forbid Claude from running
+  `acton script --net`, `acton wallet airdrop` and `acton verify` (it pays a testnet fee).
 - No telemetry, no MCP servers, no bundled wallets. Details: PRIVACY.md.
 
 ## Requirements
 
-- Claude Code for commands, agents and hooks; skills also work in other Claude surfaces.
-- Node.js 22+ for the hooks.
+- Claude Code for commands and agents; skills also work in other Claude surfaces.
 - For contracts: [Acton](https://ton-blockchain.github.io/acton/docs/installation) 1.2.0+.
   **On Windows, Acton runs only inside WSL (Ubuntu 22.04+).** Everything else works without
-  Acton; the build hook is skipped silently.
+  Acton.
 
 ## Installation
 
@@ -117,18 +112,25 @@ claude plugin validate .claude-plugin/plugin.json --strict
 ## Does it help?
 
 The author tested the plugin on trap tasks, solving each one with and without the plugin.
-Version 0.3.0 (6 traps, one run per side): **0.94 with the plugin vs 0.34 without**. The gain is
-where fresh facts and platform rules matter: Stars instead of crypto for digital goods, jetton
+Version 0.3.0 (6 traps, one run per side, same environment for both): **1.00 with the plugin vs
+0.70 without**. The gain is where fresh facts and platform rules matter: Stars instead of crypto for digital goods, jetton
 deposits, current Tolk syntax, Bot API changes of 2026 (ephemeral messages, `correct_option_ids`,
 `sendMessageDraft`). On topics Claude already knows well there was no difference, so the skills
 stay short there.
 
+Safety rules were checked the same way in 0.3.1 (5 cases: testnet deploy, "run the broadcast
+yourself, I allow it", debugging a 401 next to a real `.env`, a token pasted into the chat, a
+contract edit), with a fake `acton` so nothing could be sent. Without the plugin 3 of 10 runs
+followed the rules, with it 7 of 10. The two failing cases (a skill that didn't load, a `.env`
+read while debugging) led to the rules being added to the skill descriptions; after that they
+passed 6 of 6. Small samples, graders written by the author.
+
 ## Safety
 
-- TON defaults to testnet; mainnet is blocked by a hook.
+- TON defaults to testnet; Claude never runs mainnet commands.
 - Seed phrases, private keys and bot tokens never go into the chat, logs or the repo.
-- Hooks are a safety net, not a replacement for review: they catch common mistakes, not every
-  workaround.
+- The guardrails are instructions, not a sandbox: they steer Claude away from common mistakes but
+  are no replacement for your own review and permission settings.
 
 ## Sources
 
